@@ -36,14 +36,16 @@ class DataSource {
         projectName: String,
         projectLeader: String,
         userEmail: String,
-        userName: String
+        userName: String,
+        contribution: String
 
     ) {
         val joinRequestMap = hashMapOf(
             "projectName" to projectName,
             "projectLeader" to projectLeader,
             "userEmail" to userEmail,
-            "userName" to userName
+            "userName" to userName,
+            "contribution" to contribution
         )
 
         db.collection("JoinRequests").document(userName).set(joinRequestMap)

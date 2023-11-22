@@ -7,6 +7,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.onelifefoundation_client.authentication.ForgotPasswordScreen
 import com.google.accompanist.pager.ExperimentalPagerApi
 import com.example.onelifefoundation_client.authentication.LoginViewModel
 import com.example.onelifefoundation_client.authentication.SignInScreen
@@ -18,6 +19,7 @@ import com.example.onelifefoundation_client.project.HomeScreen
 import com.example.onelifefoundation_client.project.ProjectFieldStep2Screen
 import com.example.onelifefoundation_client.project.ProjectDetailsStep1Screen
 import com.example.onelifefoundation_client.project.WebViewScreen
+import com.example.onelifefoundation_client.termsAndprivacy.TermsAndPrivacyScreen
 
 @OptIn(ExperimentalAnimationApi::class, ExperimentalPagerApi::class)
 @Composable
@@ -70,6 +72,14 @@ fun AppNavigation(navController: NavHostController, loginViewModel: LoginViewMod
                 WebViewScreen(url = it, navController)
             }
 
+        }
+
+        composable(route = Screens.TermsAndPrivacyScreen) {
+            TermsAndPrivacyScreen(navController)
+        }
+
+        composable(route=Screens.ForgotPasswordScreen){
+            ForgotPasswordScreen(navController)
         }
 
     }

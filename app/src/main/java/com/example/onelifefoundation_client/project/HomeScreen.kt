@@ -48,7 +48,7 @@ fun HomeScreen(navController: NavController) {
         .collectAsState(emptyList()).value
 
     val onDonateClick: (Project) -> Unit = { project ->
-        val donateUrl = "https://www.paypal.com/your_paypal"
+        val donateUrl = "https://www.paypal.com/donate/?hosted_button_id=4CRM94LHZDVTW\""
         navController.navigate("${Screens.webViewScreen}?url=$donateUrl") {
             launchSingleTop = true
         }

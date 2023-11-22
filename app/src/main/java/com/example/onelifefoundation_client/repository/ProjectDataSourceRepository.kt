@@ -2,8 +2,6 @@ package com.example.onelifefoundation_client.repository
 
 
 
-
-import android.net.Uri
 import kotlinx.coroutines.flow.Flow
 
 class ProjectDataSourceRepository {
@@ -21,8 +19,9 @@ class ProjectDataSourceRepository {
         projectName: String,
         projectLeader: String,
         userEmail: String,
-        userName: String
+        userName: String,
+        contribution: String
     ) {
-        dataSource.addProjectJoinRequest(projectName,projectLeader,userEmail, userName)
+        dataSource.addProjectJoinRequest(projectName,projectLeader,userEmail, userName, contribution)
     }
 }

@@ -11,26 +11,26 @@ sealed class OnBoardingPage(
     val description: String
 ) {
     object First : OnBoardingPage(
-        image = R.drawable.img,
-        title = "OneLife Foundation",
-        description = "Welcome to the OneLife Foundation app."
+        image = R.drawable.dancer_2302208,
+        title = "Welcome!!! ",
+        description = "We're so glad you've made your way here :D"
     )
 
     object Second : OnBoardingPage(
         image = R.drawable.img_1,
         title = "Make a difference",
-        description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod."
+        description = "This is your opportunity to partner with us and do your part in your community"
     )
 
     object Third : OnBoardingPage(
-        image = R.drawable.img,
-        title = "Let's partner together",
-        description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod."
+        image = R.drawable.helpinghands,
+        title = "Donate, Sign Up or get more info",
+        description = "You can either donate money to projects, arrange to give some goods, or give of your time"
     )
 
     object Four : OnBoardingPage(
-        image = R.drawable.img_1,
+        image = R.drawable.img_3,
         title = "You're ready",
-        description = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod."
+        description = "Sign Up to see the various projects going on, see you soon ;)"
     )
 }

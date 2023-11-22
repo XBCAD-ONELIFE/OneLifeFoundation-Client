@@ -18,9 +18,11 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
+import com.example.onelifefoundation_client.components.CheckBoxWithLabel
 import com.example.onelifefoundation_client.components.FilledButtond
 import com.example.onelifefoundation_client.components.OutlinedTextFieldD
 import com.example.onelifefoundation_client.components.TopAppBard
+import com.example.onelifefoundation_client.components.updateLabels
 import com.example.onelifefoundation_client.navigation.Screens
 import com.example.onelifefoundation_client.repository.ProjectDataSourceRepository
 import kotlinx.coroutines.launch
@@ -36,6 +38,7 @@ fun ProjectFieldStep2Screen(
     val projectDataSourceRepository = ProjectDataSourceRepository()
     var userName by remember { mutableStateOf("") }
     var email by remember { mutableStateOf("") }
+    var contribution by remember { mutableStateOf("") }
 
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
@@ -85,12 +88,26 @@ fun ProjectFieldStep2Screen(
                 label = "Name"
             )
 
+            Spacer(modifier = Modifier.size(24.dp))
+
+            CheckBoxWithLabel(label = "Money") { isChecked: Boolean ->
+                contribution = updateLabels("Money", isChecked, contribution)
+            }
+
+            CheckBoxWithLabel(label = "Skills") { isChecked: Boolean ->
+                contribution = updateLabels("Skills", isChecked, contribution)
+            }
+
+            CheckBoxWithLabel(label = "Goods") { isChecked: Boolean ->
+                contribution = updateLabels("Goods", isChecked, contribution)
+            }
+
 
             Spacer(modifier = Modifier.size(24.dp))
             FilledButtond(
                 onClick = {
-                    if (projectName.isNotBlank() && email.isNotBlank()) {
-                        projectDataSourceRepository.addProjectJoinRequest(projectName,projectLeader,email,userName)
+                    if (email.isNotBlank() && userName.isNotBlank()) {
+                        projectDataSourceRepository.addProjectJoinRequest(projectName,projectLeader,email,userName,contribution)
                         scope.launch {
                             snackbarHostState.showSnackbar("Successfully submitted")
                         }
@@ -98,6 +115,7 @@ fun ProjectFieldStep2Screen(
                         navController.navigate(Screens.finishScreen)
                     } else {
                         // Handle validation or error message
+                        navController.navigate(Screens.finishScreen)
                     }
                 },
                 label = "Proceed"

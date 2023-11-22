@@ -97,7 +97,7 @@ fun SignInScreen(navController: NavController, loginViewModel: LoginViewModel? =
                 )
             }
 
-            CheckBoxWithLabel("Stay Sign In ?")
+            //CheckBoxWithLabel("Stay Sign In ?")
             Spacer(modifier = Modifier.size(4.dp))
 
             // Sign In button
@@ -110,20 +110,46 @@ fun SignInScreen(navController: NavController, loginViewModel: LoginViewModel? =
 
             // "Don't have an account" link
             Row {
-                Text(text = "Don't have an account,")
+                Text(text = "Don't have an account yet? ")
                 ClickableText(text = buildAnnotatedString {
+                    withStyle(
+                        style = SpanStyle(
+                            fontWeight = FontWeight.Bold,
+                            fontSize = MaterialTheme.typography.labelLarge.fontSize,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+                    ) {
+                        append("Sign Up here")
+                    }
+                }, onClick = {
+                    navController.navigate(Screens.signUpScreen)
+                })
+            }
+
+
+
+            Spacer(modifier = Modifier.size(10.dp))
+
+            ClickableText(
+                text = buildAnnotatedString {
                     withStyle(
                         style = SpanStyle(
                             fontWeight = FontWeight.Bold,
                             color = MaterialTheme.colorScheme.primary
                         )
                     ) {
-                        append("please sign up")
+                        append("Forgot Password?")
                     }
-                }, onClick = {
-                    navController.navigate(Screens.signUpScreen)
-                })
-            }
+                },
+                onClick = {
+                    // You can navigate to a password recovery screen or show a dialog
+                    // to handle the forgot password functionality.
+                    navController.navigate(Screens.ForgotPasswordScreen)
+                    // or show a dialog with password recovery options.
+                    // You may want to implement this according to your app's architecture.
+                }
+            )
+
 
             // Display a loading indicator while signing in
             if (loginUiState?.isLoading == true) {

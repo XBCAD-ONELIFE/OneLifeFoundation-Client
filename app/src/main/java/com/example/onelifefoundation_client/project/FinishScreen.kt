@@ -4,6 +4,7 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -23,19 +24,26 @@ import com.example.onelifefoundation_client.components.TopAppBard
 import com.example.onelifefoundation_client.navigation.Screens
 
 @Composable
-fun FinishScreen(navController: NavController){
-    val text="Thank you for your contribution!!!\n" +
+fun FinishScreen(navController: NavController) {
+    val text = "Thank you for your contribution!!!\n" +
             "You will receive a confirmation " +
             "email and someone will contact you " +
             "shortly regarding the project :)"
-    Column {
-        TopAppBard("Finish",navController=navController)
-        Spacer(modifier= Modifier.size(16.dp))
-        Column(verticalArrangement = Arrangement.Center,
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(8.dp)
+    ) {
+        TopAppBard("Finish", navController = navController)
+        Spacer(modifier = Modifier.size(16.dp))
+        Column(
+            verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally,
-            modifier=Modifier.padding(8.dp)){
+            modifier = Modifier.weight(1f) // This modifier will make the content take all available vertical space
+        ) {
             Text(text = text, fontSize = 18.sp)
-            Spacer(modifier= Modifier.size(8.dp))
+            Spacer(modifier = Modifier.size(8.dp))
             Image(
                 painter = painterResource(id = R.drawable.img_3),
                 contentDescription = null,
@@ -44,10 +52,11 @@ fun FinishScreen(navController: NavController){
                     .clip(CircleShape),
                 contentScale = ContentScale.Crop
             )
+            Spacer(modifier = Modifier.size(8.dp))
             FilledButtond(
                 onClick = { navController.navigate(Screens.homeScreen) },
-                label ="Home",
-                modifier = Modifier.align(Alignment.CenterHorizontally) as Modifier.Companion
+                label = "Home",
+                modifier = Modifier.align(Alignment.CenterHorizontally)
             )
         }
     }

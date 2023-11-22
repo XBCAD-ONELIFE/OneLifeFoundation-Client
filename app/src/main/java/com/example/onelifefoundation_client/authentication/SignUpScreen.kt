@@ -10,6 +10,7 @@ import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -17,7 +18,12 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.SpanStyle
@@ -27,6 +33,7 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import com.example.onelifefoundation_client.components.CheckBoxTP
 import com.example.onelifefoundation_client.components.FilledButtond
 import com.example.onelifefoundation_client.components.TopAppBard
 import com.example.onelifefoundation_client.navigation.Screens
@@ -38,6 +45,12 @@ fun SignUpScreen(navController: NavController, loginViewModel: LoginViewModel? =
     val loginUiState = loginViewModel?.loginUiState
     val isError = loginUiState?.signUpError != null
     val context = LocalContext.current
+    val focusRequester = remember { FocusRequester() }
+
+
+
+    //var agreedToTerms = remember { mutableStateOf(false) }
+
 
     Column(modifier = Modifier.fillMaxWidth()) {
         // Top AppBar
@@ -105,9 +118,18 @@ fun SignUpScreen(navController: NavController, loginViewModel: LoginViewModel? =
 
             Spacer(modifier = Modifier.size(4.dp))
 
+
+
+
+            var agreedToTerms = CheckBoxTP(navController, "By signing up you agree to our ", "T&Cs and Privacy Policy",focusRequester)
+
+
+
+
+
             // Sign In link and Sign Up button
             Row {
-                androidx.compose.material3.Text(text = "Already have an account,")
+                androidx.compose.material3.Text(text = " Already have an account,")
                 ClickableText(text = buildAnnotatedString {
                     withStyle(
                         style = SpanStyle(
@@ -115,7 +137,7 @@ fun SignUpScreen(navController: NavController, loginViewModel: LoginViewModel? =
                             color = MaterialTheme.colorScheme.primary
                         )
                     ) {
-                        append("please sign in")
+                        append(" SignIn here")
                     }
                 }, onClick = {
                     navController.navigate(Screens.signInScreen)
@@ -123,9 +145,19 @@ fun SignUpScreen(navController: NavController, loginViewModel: LoginViewModel? =
             }
 
             FilledButtond(
-                onClick = { loginViewModel?.createUser(context) },
-                label = "Sign Up"
+                onClick = {
+                    if (agreedToTerms.value) {
+                        // Only create user if the checkbox is checked
+                        loginViewModel?.createUser(context)
+                    } else {
+                        // You might want to provide some feedback or show an error message
+                    }
+                },
+                label = "Sign Up",
+
+                //enabled = agreedToTerms.value // Enable the button based on the state of the checkbox
             )
+
 
             // Display a loading indicator while creating the user
             if (loginUiState?.isLoading == true) {

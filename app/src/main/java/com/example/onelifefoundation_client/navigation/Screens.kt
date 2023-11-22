@@ -17,7 +17,8 @@ object Screens {
     const val root="root"
     const val authGraph="auth_graph"
     const val homeGraph="homeGraph"
-
+    const val TermsAndPrivacyScreen ="terms_and_privacy_screen"
+    const val ForgotPasswordScreen = "ForgotPasswordScreen"
     const val webViewScreen = "web_view_screen"
 
 

@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.dp
 fun FilledButtond(
     onClick:() -> Unit,
     label:String,
-    modifier: Modifier.Companion =Modifier
+    modifier: Modifier =Modifier
 ){
     Column {
         Button(
